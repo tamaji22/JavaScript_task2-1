@@ -15,70 +15,51 @@
   <body>
     <h1>FizzBuzz問題</h1>
     <label for="fizz">FizzNum：</label>
-    <input
-      type="text"
-      name="fizz"
-      id="fizz"
-      placeholder="整数値を入力してください"
-    /><br />
+    <input type="text" name="fizz" id="fizz" placeholder="整数値を入力してください" /><br />
     <label for="buzz">BuzzNum：</label>
-    <input
-      type="text"
-      name="buzz"
-      id="buzz"
-      placeholder="整数値を入力してください"
-    /><br />
+    <input type="text" name="buzz" id="buzz" placeholder="整数値を入力してください" /><br />
     <input type="button" name="button" id="button" value="実行" />
     <h3>【出力】</h3>
     <div id="out"></div>
     <script>
-      "use strict";
+      'use strict';
 
-      document.getElementById("button").onclick = () => {
-        // 入力値のチェック関数
-        function chkNum(num) {
-          if (
-            Number.isInteger(num) === true &&
-            num > 0 &&
-            num != null &&
-            num != ""
-          ) {
-            return true;
-          } else {
-            return false;
-          }
-        }
+      // 入力値のチェック関数
+      function chkNum(num) {
+        return Number.isInteger(num) && num > 0 && num !== null && num !== '';
+      }
 
-        const fizz = Number(document.getElementById("fizz").value);
-        const buzz = Number(document.getElementById("buzz").value);
+      document.getElementById('button').addEventListener('click', () => {
+        const fizz = Number(document.getElementById('fizz').value);
+        const buzz = Number(document.getElementById('buzz').value);
         const fizzBuzz = fizz * buzz;
 
         const fragment = document.createDocumentFragment();
 
-        if (chkNum(fizz) === true && chkNum(buzz) === true) {
+        if (chkNum(fizz) && chkNum(buzz)) {
           for (let i = 1; i < 100; i++) {
-            const div = document.createElement("div");
+            const div = document.createElement('div');
             if (i % fizzBuzz === 0) {
-              div.textContent = "FizzBuzz " + i;
+              div.textContent = 'FizzBuzz ' + i;
               fragment.appendChild(div);
             } else if (i % fizz === 0) {
-              div.textContent = "Fizz " + i;
+              div.textContent = 'Fizz ' + i;
               fragment.appendChild(div);
             } else if (i % buzz === 0) {
-              div.textContent = "Buzz " + i;
+              div.textContent = 'Buzz ' + i;
               fragment.appendChild(div);
             }
           }
         } else {
-          const div = document.createElement("div");
-          div.textContent = "整数値を入力してください";
+          const div = document.createElement('div');
+          div.textContent = '整数値を入力してください';
           fragment.appendChild(div);
         }
         // 結果の出力(以前の結果が残らないように子要素を削除してから出力する)
-        const out = document.getElementById("out");
-        out.innerHTML = "";
+        const out = document.getElementById('out');
+        out.innerHTML = '';
         out.appendChild(fragment);
-      };
+      });
     </script>
   </body>
 </html>
